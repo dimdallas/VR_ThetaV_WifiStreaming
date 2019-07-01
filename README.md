@@ -6,17 +6,17 @@ Theta S&V Wifi Streaming Demo with Unity
 2. A PC or Mac that is connected to Wifi. iOS or Android will probably work as well. 
 
 ## Usage
-###THETA S
+### THETA S
 1. Turn the THETA S on with Wifi mode enabled.
 2. Establish the WiFi connection between your PC/Mac and the THETA. The password is written on the THETA, the 8 characters after XS (not including XS)
 3. When you open the project in Unity and start a "ThetaSWifiStreamingDemo" scene, the streaming image will appear on the material of Sphere100
 
-###THETA V AP mode
+### THETA V AP mode
 1. Turn the THETA V on with Wifi AP mode enabled.
 2. Establish the WiFi connection between your PC/Mac and the THETA. The password is written on the THETA, the 8 characters after YL (not including YL)
 3. When you open the project in Unity and start a "ThetaVWifiApModeStreamingDemo" scene, the streaming image will appear on the material of Sphere100
 
-###THETA V Client mode
+### THETA V Client mode
 1. Turn the THETA V on with Wifi Client mode enabled.
 2. Follow the links below to establish the WiFi connection between your WiFi rounter and the THETA. https://support.theta360.com/en/manual/v/content/prepare/prepare_08.html
 3. Establish the WiFi connection between the WiFi router and your PC/Mac.
