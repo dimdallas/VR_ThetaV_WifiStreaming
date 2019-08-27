@@ -15,6 +15,9 @@ public class ThetaVWifiClientModeStreaming : MonoBehaviour {
 	private string executeCmd = "/osc/commands/execute";
     public string THETA_ID = "THETAYL00165011";
     public string THETA_PASSWORD = "00165011";
+    Texture2D tex; //= new Texture2D(2, 2);
+    Texture2D tex2; //= new Texture2D(2, 2);
+    bool TexStored = false;
 
     // Use this for initialization
     IEnumerator Start () {
@@ -79,9 +82,22 @@ public class ThetaVWifiClientModeStreaming : MonoBehaviour {
                         {
                             // mjpeg end (... 0xFF 0xD9] )
 
-                            Texture2D tex = new Texture2D(2, 2);
-                            tex.LoadImage((byte[])imageBytes.ToArray());
-                            myRenderer.material.mainTexture = tex;
+                            if (TexStored)
+                            {
+                                tex2 = new Texture2D(2, 2);
+                                tex2.LoadImage((byte[])imageBytes.ToArray());
+                                myRenderer.material.mainTexture = tex2;
+                                Destroy(tex);
+                                TexStored = false;
+                            }
+                            else
+                            {
+                                tex = new Texture2D(2, 2);
+                                tex.LoadImage((byte[])imageBytes.ToArray());
+                                myRenderer.material.mainTexture = tex;
+                                Destroy(tex2);
+                                TexStored = true;
+                            }
                             imageBytes.Clear();
                             yield return null;
                             isLoadStart = false;

@@ -14,9 +14,12 @@ public class ThetaWifiStreaming : MonoBehaviour {
 	public string thetaUrl = "http://192.168.1.1:80";
 	private string executeCmd = "/osc/commands/execute";
 	public JsonData outputJson = new JsonData();
+    Texture2D tex; //= new Texture2D(2, 2);
+    Texture2D tex2; //= new Texture2D(2, 2);
+    bool TexStored = false;
 
-	// Use this for initialization
-	IEnumerator Start () {
+    // Use this for initialization
+    IEnumerator Start () {
 		string jsonStr;
 		myRenderer = GetComponent<Renderer>();
 
@@ -69,12 +72,25 @@ public class ThetaWifiStreaming : MonoBehaviour {
 				imageBytes.Add(byteData2);
 
 				if (byteData1 == 0xFF && byteData2 == 0xD9){
-					// mjpeg end (... 0xFF 0xD9] )
+                    // mjpeg end (... 0xFF 0xD9] )
 
-					Texture2D tex = new Texture2D(2, 2);
-					tex.LoadImage ((byte[])imageBytes.ToArray ());
-					myRenderer.material.mainTexture = tex;
-					imageBytes.Clear();
+                    if (TexStored)
+                    {
+                        tex2 = new Texture2D(2, 2);
+                        tex2.LoadImage((byte[])imageBytes.ToArray());
+                        myRenderer.material.mainTexture = tex2;
+                        Destroy(tex);
+                        TexStored = false;
+                    }
+                    else
+                    {
+                        tex = new Texture2D(2, 2);
+                        tex.LoadImage((byte[])imageBytes.ToArray());
+                        myRenderer.material.mainTexture = tex;
+                        Destroy(tex2);
+                        TexStored = true;
+                    }
+                    imageBytes.Clear();
 					yield return null;
 					isLoadStart = false;
 				}
